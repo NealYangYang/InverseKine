@@ -9,8 +9,8 @@ class Ikine
   double T0_6[4][4];   //转换矩阵T0_6
   
   /***机械臂参数***/
-  const double Lu = 50;
-  const double Lf = 70;
+  double Lu = 50;
+  double Lf = 70;
   
   /***Euler角 ***/
   double alfa;
