@@ -15,7 +15,7 @@ int main()
     {0,0,0,1}
   };
   
-  Ikine ikine( matrix );
+  Ikine ikine( matrix, 50.0, 70.0 );
 
   ikine.getEulerAngle();
   ikine.getQ6_0();

@@ -6,8 +6,10 @@ using std::endl;
 #include <cmath>
 #include "Ikine.h"
 
-Ikine::Ikine( const double inputMatrix[ 4 ][ 4 ] )
+Ikine::Ikine( const double inputMatrix[ 4 ][ 4 ], double lu, double lf )
 {
+  Lu = lu;
+  Lf = lf;
   //输入矩阵赋值给坐标系6矩阵
   for ( int i = 0; i < 4; i++ )
     {
