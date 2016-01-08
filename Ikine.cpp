@@ -104,3 +104,13 @@ void Ikine::getCosTheta6()
   Theta6_4_1 = atan2(lamda4_1, lamda4_2) - atan2(Q6_0[1][0],sqrt(lamda4_1*lamda4_1+lamda4_2*lamda4_2-Q6_0[1][0]*Q6_0[1][0]));
   Theta6_4_2 = atan2(lamda4_1, lamda4_2) - atan2(Q6_0[1][0],-sqrt(lamda4_1*lamda4_1+lamda4_2*lamda4_2-Q6_0[1][0]*Q6_0[1][0]));
 }
+
+void Ikine::getIkine()
+{
+  getEulerAngle();
+  getQ6_0();
+  getCosTheta4();
+  getCosTheta5();
+  getCosTheta6();  void getEulerAngle();   //计算与旋转矩阵对应的Euler
+
+}

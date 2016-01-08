@@ -48,6 +48,7 @@ class Ikine
 	 void getCosTheta4();
 	 void getCosTheta5();
 	 void getCosTheta6();
+	 void getIkine();
 	 
  private:
   double matrixOfSix[ 4 ][ 4 ];   //坐标系6矩阵

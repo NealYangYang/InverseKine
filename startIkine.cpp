@@ -16,17 +16,7 @@ int main()
   };
   
   Ikine ikine( matrix, 50.0, 70.0 );
-
-  ikine.getEulerAngle();
-  ikine.getQ6_0();
-  //if ( (ikine.Q6_0[0][0] - 0.0) < 0.0001 )
-  //  {
-  //   ikine.Q6_0[0][0] = 0.0;
-  // }
-  ikine.getCosTheta4();
-  ikine.getCosTheta5();
-  ikine.getCosTheta6();
-
+  ikine.getIkine();
 //cout << "alfa :" << ikine.alfa * 180 / M_PI << endl;
 //cout << "beta :" << ikine.beta * 180 / M_PI << endl;
 //cout << "gama :" << ikine.gama * 180 / M_PI << endl;
