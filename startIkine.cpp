@@ -5,7 +5,7 @@ using std::endl;
 #include <cmath>
 
 #include "Ikine.h"
-#include "Fkine.h"
+#include "fkine.h"
 
 int main()
 {
@@ -71,7 +71,7 @@ int main()
   cout << "Theta6_4_2 :" << ikine.Theta6_4_2 * 180 / M_PI << endl;
   cout << endl;
 
-  Fkine fkine(50.0, 70.0);
+  Fkine fkine;
   fkine.getFkine(23,34,23,12,44,-65);
   fkine.showResult();
   ikine.getEulerAngle();

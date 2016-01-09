@@ -8,7 +8,7 @@ class Fkine
 {
  public:
   
-  Fkine(double lu,double lf);
+  Fkine();
 
   double T[4][4];
 
