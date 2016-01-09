@@ -16,8 +16,8 @@ class Fkine
   void showResult();
   
  private:
-  double pi = 180;
-  double Lu = 50.0;
-  double Lf = 70.0;
+  double pi;
+  double Lu;
+  double Lf;
   
 };

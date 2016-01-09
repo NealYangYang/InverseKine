@@ -8,7 +8,12 @@ using std::setw;
 #include <cmath>
 #include "fkine.h"
 
-Fkine::Fkine(){}
+Fkine::Fkine()
+{
+  pi = 180;
+  Lu = 50;
+  Lf = 70;
+}
 
 void Fkine::getFkine(double q1, double q2, double q3, double q4, double q5, double q6)
 {

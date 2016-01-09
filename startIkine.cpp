@@ -9,14 +9,15 @@ using std::endl;
 
 int main()
 {
-  const double matrix[4][4] = {
+  double matrix[4][4] = {
     {-0.415,-0.496,-0.763,43.073},
     {0.653,-0.746,0.123,100.755},
     {-0.633,-0.444,0.634,-17.307},
     {0,0,0,1}
   };
   
-  Ikine ikine( matrix, 50.0, 70.0 );
+  Ikine ikine( 50.0, 70.0 );
+  ikine.setMatrix( matrix );
   ikine.getIkine();
 //cout << "alfa :" << ikine.alfa * 180 / M_PI << endl;
 //cout << "beta :" << ikine.beta * 180 / M_PI << endl;

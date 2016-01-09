@@ -6,10 +6,14 @@ using std::endl;
 #include <cmath>
 #include "Ikine.h"
 
-Ikine::Ikine( const double inputMatrix[ 4 ][ 4 ], double lu, double lf )
+Ikine::Ikine( double lu, double lf )
 {
   Lu = lu;
   Lf = lf;
+}
+
+void Ikine::setMatrix(double inputMatrix[4][4])
+{
   //输入矩阵赋值给坐标系6矩阵
   for ( int i = 0; i < 4; i++ )
     {
@@ -23,7 +27,6 @@ Ikine::Ikine( const double inputMatrix[ 4 ][ 4 ], double lu, double lf )
 	R0_6[ i ][ j ] = inputMatrix[ i ][ j ];
     }
 }
-
 void Ikine::getEulerAngle()
 {
   beta = atan2( -R0_6[ 2 ][ 0 ], sqrt( R0_6[0][0]*R0_6[0][0]+R0_6[1][0]*R0_6[1][0]) );
