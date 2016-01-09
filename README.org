@@ -1,0 +1,15 @@
+* class Fkine
+** 初始化: Fkine( double lu, double lf );
+        //输入机械臂上臂下臂长度参数
+
+** 函数: getFkine( double q1, double q2, double q3, double q4, double q5, double q6)
+        // 输入一组关节角度，输出转换矩阵为Fkine::T[4][4] 
+
+* class Ikine
+** 初始化: Ikine( double lu, double lf );
+        // 输入机械臂上臂下臂长度参数
+** 函数: setMatrix( doube inputmatrix[4][4] )
+        // 输入4*4目标矩阵
+
+         getIkine();
+         // 计算逆解，输出值保存在Ikine::Sol1[8], Sol2[8]--- Sol8[8]

@@ -5,7 +5,7 @@ using std::endl;
 #include <cmath>
 
 #include "Ikine.h"
-#include "fkine.h"
+#include "Fkine.h"
 
 int main()
 {
@@ -71,7 +71,7 @@ int main()
   cout << "Theta6_4_2 :" << ikine.Theta6_4_2 * 180 / M_PI << endl;
   cout << endl;
 
-  Fkine fkine;
+  Fkine fkine(50.0, 70.0);
   fkine.getFkine(23,34,23,12,44,-65);
   fkine.showResult();
   

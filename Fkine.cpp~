@@ -6,13 +6,13 @@ using std::endl;
 using std::setw;
 
 #include <cmath>
-#include "Fkine.h"
+#include "fkine.h"
 
-Fkine::Fkine(double lu, double lf)
+Fkine::Fkine()
 {
   pi = 180;
-  Lu = lu;
-  Lf = lf;
+  Lu = 50;
+  Lf = 70;
 }
 
 void Fkine::getFkine(double q1, double q2, double q3, double q4, double q5, double q6)
