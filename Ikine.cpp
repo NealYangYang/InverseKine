@@ -108,6 +108,67 @@ void Ikine::getCosTheta6()
   Theta6_4_2 = atan2(lamda4_1, lamda4_2) - atan2(Q6_0[1][0],-sqrt(lamda4_1*lamda4_1+lamda4_2*lamda4_2-Q6_0[1][0]*Q6_0[1][0]));
 }
 
+void Ikine::checkTheta4_6()
+{
+  error = 0.01;
+  
+  if ( fabs(sin(Theta6_1_1)*(-Lu*sin(Theta4_1)*cos(Theta5_1_1))+cos(Theta6_1_1)*(Lf-Lu*cos(Theta4_1)) - Q6_0[1][0]) < error)
+    {
+      cout << "Solution1 : Success!" << endl;
+    }else{
+      cout << "Solution1 : Fail!" << endl;
+    }
+
+  if ( fabs(sin(Theta6_1_2)*(-Lu*sin(Theta4_1)*cos(Theta5_1_1))+cos(Theta6_1_2)*(Lf-Lu*cos(Theta4_1)) - Q6_0[1][0]) < error)
+    {
+      cout << "Solution2 : Success!" << endl;
+    }else{
+      cout << "Solution2 : Fail!" << endl;
+    }
+
+  if ( fabs(sin(Theta6_2_1)*(-Lu*sin(Theta4_1)*cos(Theta5_1_2))+cos(Theta6_2_1)*(Lf-Lu*cos(Theta4_1)) - Q6_0[1][0]) < error)
+    {
+      cout << "Solution3 : Success!" << endl;
+    }else{
+      cout << "Solution3 : Fail!" << endl;
+    }
+
+  if ( fabs(sin(Theta6_2_2)*(-Lu*sin(Theta4_1)*cos(Theta5_1_2))+cos(Theta6_2_2)*(Lf-Lu*cos(Theta4_1)) - Q6_0[1][0]) < error)
+    {
+      cout << "Solution4 : Success!" << endl;
+    }else{
+      cout << "Solution4 : Fail!" << endl;
+    }
+
+  if (fabs( sin(Theta6_3_1)*(-Lu*sin(Theta4_2)*cos(Theta5_2_1))+cos(Theta6_3_1)*(Lf-Lu*cos(Theta4_2)) - Q6_0[1][0]) < error)
+    {
+      cout << "Solution5 : Success!" << endl;
+    }else{
+      cout << "Solution5 : Fail!" << endl;
+    }
+
+  if ( fabs(sin(Theta6_3_2)*(-Lu*sin(Theta4_2)*cos(Theta5_2_1))+cos(Theta6_3_2)*(Lf-Lu*cos(Theta4_2)) - Q6_0[1][0]) < error)
+    {
+      cout << "Solution6 : Success!" << endl;
+    }else{
+      cout << "Solution6 : Fail!" << endl;
+    }
+
+  if ( fabs(sin(Theta6_4_1)*(-Lu*sin(Theta4_2)*cos(Theta5_2_2))+cos(Theta6_4_1)*(Lf-Lu*cos(Theta4_2)) - Q6_0[1][0]) < error)
+    {
+      cout << "Solution7 : Success!" << endl;
+    }else{
+      cout << "Solution7 : Fail!" << endl;
+    }
+
+  if ( fabs(sin(Theta6_4_1)*(-Lu*sin(Theta4_2)*cos(Theta5_2_2))+cos(Theta6_4_1)*(Lf-Lu*cos(Theta4_2)) - Q6_0[1][0]) < error)
+    {
+      cout << "Solution8 : Success!" << endl;
+    }else{
+      cout << "Solution8 : Fail!" << endl;
+    }
+}
+
 void Ikine::getIkine()
 {
   getEulerAngle();
@@ -115,4 +176,5 @@ void Ikine::getIkine()
   getCosTheta4();
   getCosTheta5();
   getCosTheta6();
+  checkTheta4_6();
 }

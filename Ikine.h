@@ -41,7 +41,7 @@ class Ikine
   double Theta6_3_2;
   double Theta6_4_1;
   double Theta6_4_2;
-  
+  double error;
   Ikine( double lu, double lf );   //构造函数，初始化同时提取旋x转矩阵
   void setMatrix(double inputmatrix[4][4]);
   void getEulerAngle();   //计算与旋转矩阵对应的Euler角
@@ -49,6 +49,7 @@ class Ikine
   void getCosTheta4();
   void getCosTheta5();
   void getCosTheta6();
+  void checkTheta4_6();
   void getIkine();
  private:
   double matrixOfSix[ 4 ][ 4 ];   //坐标系6矩阵
