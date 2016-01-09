@@ -37,7 +37,7 @@ void Ikine::getEulerAngle()
     }else if ( beta * 180 / M_PI == -90 )
     {
       alfa = 0;
-      gama = -atan2( R0_6[0][1], R0_6[1][2] );
+      gama = -atan2( R0_6[0][1], R0_6[1][1] );
     }else{
     alfa = atan2( R0_6[1][0] / cos(beta), R0_6[0][0] / cos(beta) );
     gama = atan2( R0_6[2][1] / cos(beta), R0_6[2][2] / cos(beta) );

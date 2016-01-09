@@ -5,14 +5,14 @@ using std::endl;
 #include <cmath>
 
 #include "Ikine.h"
-#include "fkine.h"
+#include "Fkine.h"
 
 int main()
 {
   double matrix[4][4] = {
-    {0,0,1,-50},
-    {-1,0,0,0},
-    {0,-1,0,70},
+    {-0.236,0.956,0.174,-17.509},
+    {-0.347,0.084,-0.934,-13.610},
+    {-0.9080,-0.281,0.312,-7.821},
     {0,0,0,1}
   };
   
@@ -75,13 +75,11 @@ int main()
   fkine.getFkine(23,34,23,12,44,-65);
   fkine.showResult();
   ikine.getEulerAngle();
-  cout << ikine.alfa * 180 / M_PI << endl;
-  cout << ikine.beta * 180 / M_PI << endl;
-  cout << ikine.gama * 180 / M_PI << endl;
+  cout << "alfa :" << ikine.alfa * 180 / M_PI << endl;
+  cout << "beta :" << ikine.beta * 180 / M_PI << endl;
+  cout << "gama :" << ikine.gama * 180 / M_PI << endl;
   cout << endl;
-  cout << ikine.R0_6[2][0] << endl;
-  cout << ikine.R0_6[0][1] << endl;
-  cout << ikine.R0_6[1][2] << endl;
+;
   
   return 0 ;
 }

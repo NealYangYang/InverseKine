@@ -6,7 +6,7 @@ using std::endl;
 using std::setw;
 
 #include <cmath>
-#include "Fkine.h"
+#include "fkine.h"
 
 Fkine::Fkine()
 {
