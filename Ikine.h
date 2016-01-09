@@ -9,8 +9,8 @@ class Ikine
   double T0_6[4][4];   //转换矩阵T0_6
   
   /***机械臂参数***/
-  const double Lu = 50;
-  const double Lf = 70;
+  double Lu;
+  double Lf;
   
   /***Euler角 ***/
   double alfa;
@@ -42,13 +42,14 @@ class Ikine
   double Theta6_4_1;
   double Theta6_4_2;
   
-  Ikine( const double inputMatrix[4][4] );   //构造函数，初始化同时提取旋x转矩阵
-	 void getEulerAngle();   //计算与旋转矩阵对应的Euler角
-	 void getQ6_0();    //计算前三轴交点在坐标系6中的位置矩阵
-	 void getCosTheta4();
-	 void getCosTheta5();
-	 void getCosTheta6();
-	 
+  Ikine( double lu, double lf );   //构造函数，初始化同时提取旋x转矩阵
+  void setMatrix(double inputmatrix[4][4]);
+  void getEulerAngle();   //计算与旋转矩阵对应的Euler角
+  void getQ6_0();    //计算前三轴交点在坐标系6中的位置矩阵
+  void getCosTheta4();
+  void getCosTheta5();
+  void getCosTheta6();
+  void getIkine();
  private:
   double matrixOfSix[ 4 ][ 4 ];   //坐标系6矩阵
 

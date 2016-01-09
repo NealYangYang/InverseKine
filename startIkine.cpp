@@ -5,28 +5,20 @@ using std::endl;
 #include <cmath>
 
 #include "Ikine.h"
+#include "fkine.h"
 
 int main()
 {
-  const double matrix[4][4] = {
+  double matrix[4][4] = {
     {-0.415,-0.496,-0.763,43.073},
     {0.653,-0.746,0.123,100.755},
     {-0.633,-0.444,0.634,-17.307},
     {0,0,0,1}
   };
   
-  Ikine ikine( matrix );
-
-  ikine.getEulerAngle();
-  ikine.getQ6_0();
-  //if ( (ikine.Q6_0[0][0] - 0.0) < 0.0001 )
-  //  {
-  //   ikine.Q6_0[0][0] = 0.0;
-  // }
-  ikine.getCosTheta4();
-  ikine.getCosTheta5();
-  ikine.getCosTheta6();
-
+  Ikine ikine( 50.0, 70.0 );
+  ikine.setMatrix( matrix );
+  ikine.getIkine();
 //cout << "alfa :" << ikine.alfa * 180 / M_PI << endl;
 //cout << "beta :" << ikine.beta * 180 / M_PI << endl;
 //cout << "gama :" << ikine.gama * 180 / M_PI << endl;
@@ -79,8 +71,9 @@ int main()
   cout << "Theta6_4_2 :" << ikine.Theta6_4_2 * 180 / M_PI << endl;
   cout << endl;
 
-//cout << "x= : " << ikine.Q6_0[0][0] << endl;
-//cout << "y= : " << ikine.Q6_0[1][0] << endl;
-//cout << "z= : " << ikine.Q6_0[2][0] << endl;
+  Fkine fkine;
+  fkine.getFkine(23,34,23,12,44,-65);
+  fkine.showResult();
+  
   return 0 ;
 }

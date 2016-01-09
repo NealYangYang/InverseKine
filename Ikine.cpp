@@ -6,7 +6,13 @@ using std::endl;
 #include <cmath>
 #include "Ikine.h"
 
-Ikine::Ikine( const double inputMatrix[ 4 ][ 4 ] )
+Ikine::Ikine( double lu, double lf )
+{
+  Lu = lu;
+  Lf = lf;
+}
+
+void Ikine::setMatrix(double inputMatrix[4][4])
 {
   //输入矩阵赋值给坐标系6矩阵
   for ( int i = 0; i < 4; i++ )
@@ -21,7 +27,6 @@ Ikine::Ikine( const double inputMatrix[ 4 ][ 4 ] )
 	R0_6[ i ][ j ] = inputMatrix[ i ][ j ];
     }
 }
-
 void Ikine::getEulerAngle()
 {
   beta = atan2( -R0_6[ 2 ][ 0 ], sqrt( R0_6[0][0]*R0_6[0][0]+R0_6[1][0]*R0_6[1][0]) );
@@ -101,4 +106,14 @@ void Ikine::getCosTheta6()
 
   Theta6_4_1 = atan2(lamda4_1, lamda4_2) - atan2(Q6_0[1][0],sqrt(lamda4_1*lamda4_1+lamda4_2*lamda4_2-Q6_0[1][0]*Q6_0[1][0]));
   Theta6_4_2 = atan2(lamda4_1, lamda4_2) - atan2(Q6_0[1][0],-sqrt(lamda4_1*lamda4_1+lamda4_2*lamda4_2-Q6_0[1][0]*Q6_0[1][0]));
+}
+
+void Ikine::getIkine()
+{
+  getEulerAngle();
+  getQ6_0();
+  getCosTheta4();
+  getCosTheta5();
+  getCosTheta6();  void getEulerAngle();   //计算与旋转矩阵对应的Euler
+
 }
