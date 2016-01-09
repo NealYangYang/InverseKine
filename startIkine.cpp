@@ -10,9 +10,9 @@ using std::endl;
 int main()
 {
   double matrix[4][4] = {
-    {-0.415,-0.496,-0.763,43.073},
-    {0.653,-0.746,0.123,100.755},
-    {-0.633,-0.444,0.634,-17.307},
+    {0,0,1,-50},
+    {-1,0,0,0},
+    {0,-1,0,70},
     {0,0,0,1}
   };
   
@@ -74,6 +74,14 @@ int main()
   Fkine fkine(50.0, 70.0);
   fkine.getFkine(23,34,23,12,44,-65);
   fkine.showResult();
+  ikine.getEulerAngle();
+  cout << ikine.alfa * 180 / M_PI << endl;
+  cout << ikine.beta * 180 / M_PI << endl;
+  cout << ikine.gama * 180 / M_PI << endl;
+  cout << endl;
+  cout << ikine.R0_6[2][0] << endl;
+  cout << ikine.R0_6[0][1] << endl;
+  cout << ikine.R0_6[1][2] << endl;
   
   return 0 ;
 }

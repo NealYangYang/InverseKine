@@ -114,6 +114,5 @@ void Ikine::getIkine()
   getQ6_0();
   getCosTheta4();
   getCosTheta5();
-  getCosTheta6();  void getEulerAngle();   //计算与旋转矩阵对应的Euler
-
+  getCosTheta6();
 }
