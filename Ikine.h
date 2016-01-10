@@ -7,6 +7,7 @@ class Ikine
  public:
   double R0_6[3][3];   //旋转矩阵R0_6
   double T0_6[4][4];   //转换矩阵T0_6
+  double Sol[16][6];
   
   /***机械臂参数***/
   double Lu;
@@ -50,6 +51,7 @@ class Ikine
   void getCosTheta5();
   void getCosTheta6();
   void checkTheta4_6();
+  void getT0_3();
   void getIkine();
  private:
   double matrixOfSix[ 4 ][ 4 ];   //坐标系6矩阵

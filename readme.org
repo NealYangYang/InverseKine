@@ -1,0 +1,18 @@
+* Matrix 使用
+** 目标： C = A * B;
+   步骤： Matrix a(4,4);
+         for(i=0;i<m;i++)//动态数组赋值
+            for(j=0;j<n;j++)
+               a.data[i][j]=A[i][j];
+         
+         Matrix b(4,4);
+         for(i=0;i<m;i++)//动态数组赋值
+            for(j=0;j<n;j++)
+               b.data[i][j]=B[i][j];
+
+         Matrix c(4,4) = a * b;
+         for(i=0;i<m;i++)//动态数组赋值
+            for(j=0;j<n;j++)
+               C[i][j]=c.data[i][j];
+
+	    

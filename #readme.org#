@@ -1,11 +1,25 @@
-#include <iostream>
+* Matrix 使用
+** 目标： C = A * B;
+   步骤： Matrix a(4,4);
+         for(i=0;i<m;i++)//动态数组赋值
+            for(j=0;j<n;j++)
+               a.data[i][j]=A[i][j];
+         
+         Matrix b(4,4);
+         for(i=0;i<m;i++)//动态数组赋值
+            for(j=0;j<n;j++)
+               b.data[i][j]=B[i][j];
+
+         Matrix c(4,4) = a * b;
+         for(i=0;i<m;i++)//动态数组赋值
+            for(j=0;j<n;j++)
+             #include <iostream>
 using std::cout;
 using std::cin;
 using std::endl;
 
 #include <cmath>
 #include "Ikine.h"
-#include "Matrix.h"
 
 Ikine::Ikine( double lu, double lf )
 {
@@ -107,8 +121,6 @@ void Ikine::getCosTheta6()
 
   Theta6_4_1 = atan2(lamda4_1, lamda4_2) - atan2(Q6_0[1][0],sqrt(lamda4_1*lamda4_1+lamda4_2*lamda4_2-Q6_0[1][0]*Q6_0[1][0]));
   Theta6_4_2 = atan2(lamda4_1, lamda4_2) - atan2(Q6_0[1][0],-sqrt(lamda4_1*lamda4_1+lamda4_2*lamda4_2-Q6_0[1][0]*Q6_0[1][0]));
-
-  
 }
 
 void Ikine::checkTheta4_6()
@@ -172,12 +184,6 @@ void Ikine::checkTheta4_6()
     }
 }
 
-void Ikine::getT0_3()
-{
-  //double T6_3[4][
-    // };
-}
-
 void Ikine::getIkine()
 {
   getEulerAngle();
@@ -187,3 +193,6 @@ void Ikine::getIkine()
   getCosTheta6();
   checkTheta4_6();
 }
+  C[i][j]=c.data[i][j];
+
+	    
