@@ -3,6 +3,9 @@ using std::cout;
 using std::cin;
 using std::endl;
 
+#include <iomanip>
+using std::setw;
+
 #include <cmath>
 #include "Ikine.h"
 #include "Matrix.h"
@@ -31,11 +34,11 @@ void Ikine::setMatrix(double inputMatrix[4][4])
 void Ikine::getEulerAngle()
 {
   beta = atan2( -R0_6[ 2 ][ 0 ], sqrt( R0_6[0][0]*R0_6[0][0]+R0_6[1][0]*R0_6[1][0]) );
-  if ( beta * 180 / M_PI == 90 )
+  if ( fabs(beta * 180 / M_PI - 90) < 0.001 )
     {
       alfa = 0;
       gama = atan2( R0_6[0][1], R0_6[1][1] );
-    }else if ( beta * 180 / M_PI == -90 )
+    }else if (fabs( beta * 180 / M_PI +90) < 0.001 )
     {
       alfa = 0;
       gama = -atan2( R0_6[0][1], R0_6[1][1] );
@@ -183,8 +186,138 @@ void Ikine::fillSolR()
 
 void Ikine::getT0_3()
 {
-  //double T6_3[4][
-    // };
+  int i = 2;
+  int m = 4;
+  int n = 4;
+  double T6_3[4][4] =
+    {
+      {cos(SolR[i][3])*cos(SolR[i][4])*cos(SolR[i][5])+sin(SolR[i][3])*sin(SolR[i][5]), -sin(SolR[i][4])*cos(SolR[i][5]), -sin(SolR[i][3])*cos(SolR[i][4])*cos(SolR[i][5])+cos(SolR[i][3])*sin(SolR[i][5]), Lf*sin(SolR[i][5])},
+      {-cos(SolR[i][3])*cos(SolR[i][4])*sin(SolR[i][5])+sin(SolR[i][3])*cos(SolR[i][5]), sin(SolR[i][4])*sin(SolR[i][5]), sin(SolR[i][3])*cos(SolR[i][4])*sin(SolR[i][5])+cos(SolR[i][3])*cos(SolR[i][5]), Lf*cos(SolR[i][5])},
+      {-cos(SolR[i][3])*sin(SolR[i][4]), -cos(SolR[i][4]), sin(SolR[i][3])*sin(SolR[i][4]), 0},
+      {0,0,0,1}
+    };
+  
+  //输出测试
+  cout << "T6_3 :" << endl;
+    for (int i = 0; i < 4; i++ )
+    {
+      for (int j = 0; j < 4; j++ )
+	{
+	  cout << setw(10) << T6_3[i][j];
+	  if (j == 3)
+	    {
+	      cout << endl;
+	    }
+	}
+    }
+  
+  
+   Matrix a(4,4);
+   for(int i=0;i<m;i++)//动态数组赋值
+     for(int j=0;j<n;j++)
+       a.data[i][j]=T0_6[i][j];
+         
+   Matrix b(4,4);
+   for(int i=0;i<m;i++)//动态数组赋值
+     for(int j=0;j<n;j++)
+       b.data[i][j]=T6_3[i][j];
+
+   Matrix c = a * b;
+   for(int i=0;i<m;i++)//动态数组赋值
+     for(int j=0;j<n;j++)
+       T0_3[i][j]=c.data[i][j];
+
+     //输出测试
+  cout << "T0_3 :" << endl;
+    for (int i = 0; i < 4; i++ )
+    {
+      for (int j = 0; j < 4; j++ )
+	{
+	  cout << setw(10) << T0_3[i][j];
+	  if (j == 3)
+	    {
+	      cout << endl;
+	    }
+	}
+    }
+
+}
+
+void Ikine::getT0_3test()
+{
+
+  double pi = 180;
+  double a1 = 125.0 /pi * M_PI;
+  double a2 = -15.0/pi* M_PI ;
+  double a3 = 39.0/pi* M_PI ;
+  double T0_3test[4][4] =
+    {
+      {cos(a1)*cos(a2)*cos(a3)-sin(a1)*sin(a3), -cos(a1)*cos(a2)*sin(a3)-sin(a1)*cos(a3), cos(a1)*sin(a2), Lu*cos(a1)*sin(a2)},
+      {sin(a1)*cos(a2)*cos(a3)+cos(a1)*sin(a3), -sin(a1)*cos(a2)*sin(a3)+cos(a1)*cos(a3), sin(a1)*sin(a2), Lu*sin(a1)*sin(a2)},
+      {-sin(a2)*cos(a3), sin(a2)*sin(a3), cos(a2), Lu*cos(a2)},
+    {0, 0, 0, 1}
+    };
+
+   //输出测试
+  cout << "T0_3test :" << endl;
+    for (int i = 0; i < 4; i++ )
+    {
+      for (int j = 0; j < 4; j++ )
+	{
+	  cout << setw(10) << T0_3test[i][j];
+	  if (j == 3)
+	    {
+	      cout << endl;
+	    }
+	}
+    }
+}
+
+void Ikine::getTheta1_3()
+{
+  double a;
+  double b;
+  double c;
+  double a1,b1,c1;
+b = atan2( -T0_3[ 2 ][ 0 ], sqrt( T0_3[0][0]*T0_3[0][0]+T0_3[1][0]*T0_3[1][0]) );
+
+ if (fabs(b * 180 / M_PI - 90) < 0.01 )
+    {
+      a = 0;
+      c = atan2( T0_3[0][1], T0_3[1][1] );
+    }else if (fabs(b * 180 / M_PI  + 90) < 0.01 )
+    {
+      a = 0;
+      c = -atan2( T0_3[0][1], T0_3[1][1] );
+    }else{
+    a = atan2( T0_3[1][0] / cos(b), T0_3[0][0] / cos(b) );
+    c = atan2( T0_3[2][1] / cos(b), T0_3[2][2] / cos(b) );
+  }
+
+ b1 = atan2( -T0_3[ 2 ][ 0 ], -sqrt( T0_3[0][0]*T0_3[0][0]+T0_3[1][0]*T0_3[1][0]) );
+
+ if (fabs(b1 * 180 / M_PI - 90) < 0.01 )
+    {
+      a1 = 0;
+      c1 = atan2( T0_3[0][1], T0_3[1][1] );
+    }else if (fabs(b1 * 180 / M_PI  + 90) < 0.01 )
+    {
+      a1 = 0;
+      c1 = -atan2( T0_3[0][1], T0_3[1][1] );
+    }else{
+    a1 = atan2( T0_3[1][0] / cos(b1), T0_3[0][0] / cos(b1) );
+    c1 = atan2( T0_3[2][1] / cos(b1), T0_3[2][2] / cos(b1) );
+  }
+  
+  Theta1_1 = a1;
+  Theta2_1 = b1;
+  Theta3_1 = c1;
+
+  Theta1_2 = a;
+  Theta2_2 = b;
+  Theta3_2 = c;
+
+  
 }
 
 void Ikine::getIkine()
@@ -197,4 +330,7 @@ void Ikine::getIkine()
   fillSol();
   checkTheta4_6();
   fillSolR();
+  getT0_3();
+  getTheta1_3();
+  getT0_3test();
 }

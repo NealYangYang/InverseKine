@@ -7,6 +7,7 @@ class Ikine
  public:
   double R0_6[3][3];   //旋转矩阵R0_6
   double T0_6[4][4];   //转换矩阵T0_6
+  double T0_3[4][4];
   double Sol[8][6];   //解过度矩阵
   double SolR[8][6];   //最终解矩阵
   
@@ -23,9 +24,15 @@ class Ikine
   double Q6_0[4][1];
 
   /***目标角度***/
-  double Theta1;
-  double Theta2;
-  double Theta3;
+  double Theta1_1;
+  double Theta2_1;
+  double Theta3_1;
+
+  double Theta1_2;
+  double Theta2_2;
+  double Theta3_2;
+
+
   
   double Theta4_1;
   double Theta4_2;
@@ -56,6 +63,8 @@ class Ikine
   void fillSol();   //将解赋值到矩阵中
   void fillSolR();
   void getT0_3();
+  void getT0_3test();
+  void getTheta1_3();
   void getIkine();
  private:
   double matrixOfSix[ 4 ][ 4 ];   //坐标系6矩阵
