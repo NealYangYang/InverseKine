@@ -11,9 +11,9 @@ int main()
 {
   double matrix[4][4] = 
     {
-      {0.817, -0.139, -0.560, 26.146},
-      {-0.354,-0.887,-0.296,27.701},
-      {-0.456,0.440,-0.774,3.563},
+      {-0.098, -0.821, -0.563, 35.305},
+      {-0.993,0.118,-0.000,-13.007},
+      {0.067,0.559,-0.827,6.931},
       {0,0,0,1}
     };
   
@@ -33,8 +33,19 @@ int main()
       cout << endl;
     }
   
+  cout << endl;
+  
+    for ( int i = 0; i < 8; i ++ )
+    {
+      cout << "****RealSolution" << i+1 << "****" << endl;
+      for ( int j = 3; j < 6; j ++ )
+	{
+	  cout << "Theta" << j << " :"  << ikine.SolR[i][j]* 180 / M_PI  << endl;}
+      cout << endl;
+    }
+
   Fkine fkine;
-  fkine.getFkine(34,-20,13,-32,105,-34.4);
+  fkine.getFkine(104,43,-123,-32,105,-34.4);
   fkine.showResult();
   ikine.getEulerAngle();
   cout << "alfa :" << ikine.alfa * 180 / M_PI << endl;
