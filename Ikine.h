@@ -51,6 +51,7 @@ class Ikine
   void getCosTheta5();
   void getCosTheta6();
   void checkTheta4_6();
+  void fillSol();   //将解赋值到矩阵中
   void getT0_3();
   void getIkine();
  private:

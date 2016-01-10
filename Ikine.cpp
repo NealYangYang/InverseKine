@@ -114,62 +114,50 @@ void Ikine::getCosTheta6()
 void Ikine::checkTheta4_6()
 {
   error = 0.01;
+
+  cout <<  cos(Sol[1][5])*Lu*sin(Sol[1][3])*cos(Sol[1][4])+sin(Sol[1][5])*(Lf-Lu*cos(Sol[1][3])) - Q6_0[0][0] << endl;
+      
+  for ( int i = 0; i < 8; i ++ )
+    {
+      if (fabs( cos(Sol[i][5])*Lu*sin(Sol[i][3])*cos(Sol[i][4])+sin(Sol[i][5])*(Lf-Lu*cos(Sol[i][3])) - Q6_0[0][0] ) < error)
+	{
+	  cout << "Solution" << i+1 << " :" << "Success!" << endl;
+	}else{
+	cout << "Solution" << i+1 << " :" << "Fail!" << endl;
+      }
+    }
   
-  if ( fabs(sin(Theta6_1_1)*(-Lu*sin(Theta4_1)*cos(Theta5_1_1))+cos(Theta6_1_1)*(Lf-Lu*cos(Theta4_1)) - Q6_0[1][0]) < error)
+}
+
+void Ikine::fillSol()
+{
+  for ( int i = 0; i < 4; i ++ )
     {
-      cout << "Solution1 : Success!" << endl;
-    }else{
-      cout << "Solution1 : Fail!" << endl;
+      Sol[i][3] = Theta4_1;
+    }
+  for ( int i = 4; i < 8; i++ )
+    {
+      Sol[i][3] = Theta4_2;
     }
 
-  if ( fabs(sin(Theta6_1_2)*(-Lu*sin(Theta4_1)*cos(Theta5_1_1))+cos(Theta6_1_2)*(Lf-Lu*cos(Theta4_1)) - Q6_0[1][0]) < error)
-    {
-      cout << "Solution2 : Success!" << endl;
-    }else{
-      cout << "Solution2 : Fail!" << endl;
-    }
+  Sol[0][4] = Theta5_1_1;
+  Sol[1][4] = Theta5_1_1;
+  Sol[2][4] = Theta5_1_2;
+  Sol[3][4] = Theta5_1_2;
+  Sol[4][4] = Theta5_2_1;
+  Sol[5][4] = Theta5_2_1;
+  Sol[6][4] = Theta5_2_2;
+  Sol[7][4] = Theta5_2_2;
 
-  if ( fabs(sin(Theta6_2_1)*(-Lu*sin(Theta4_1)*cos(Theta5_1_2))+cos(Theta6_2_1)*(Lf-Lu*cos(Theta4_1)) - Q6_0[1][0]) < error)
-    {
-      cout << "Solution3 : Success!" << endl;
-    }else{
-      cout << "Solution3 : Fail!" << endl;
-    }
-
-  if ( fabs(sin(Theta6_2_2)*(-Lu*sin(Theta4_1)*cos(Theta5_1_2))+cos(Theta6_2_2)*(Lf-Lu*cos(Theta4_1)) - Q6_0[1][0]) < error)
-    {
-      cout << "Solution4 : Success!" << endl;
-    }else{
-      cout << "Solution4 : Fail!" << endl;
-    }
-
-  if (fabs( sin(Theta6_3_1)*(-Lu*sin(Theta4_2)*cos(Theta5_2_1))+cos(Theta6_3_1)*(Lf-Lu*cos(Theta4_2)) - Q6_0[1][0]) < error)
-    {
-      cout << "Solution5 : Success!" << endl;
-    }else{
-      cout << "Solution5 : Fail!" << endl;
-    }
-
-  if ( fabs(sin(Theta6_3_2)*(-Lu*sin(Theta4_2)*cos(Theta5_2_1))+cos(Theta6_3_2)*(Lf-Lu*cos(Theta4_2)) - Q6_0[1][0]) < error)
-    {
-      cout << "Solution6 : Success!" << endl;
-    }else{
-      cout << "Solution6 : Fail!" << endl;
-    }
-
-  if ( fabs(sin(Theta6_4_1)*(-Lu*sin(Theta4_2)*cos(Theta5_2_2))+cos(Theta6_4_1)*(Lf-Lu*cos(Theta4_2)) - Q6_0[1][0]) < error)
-    {
-      cout << "Solution7 : Success!" << endl;
-    }else{
-      cout << "Solution7 : Fail!" << endl;
-    }
-
-  if ( fabs(sin(Theta6_4_1)*(-Lu*sin(Theta4_2)*cos(Theta5_2_2))+cos(Theta6_4_1)*(Lf-Lu*cos(Theta4_2)) - Q6_0[1][0]) < error)
-    {
-      cout << "Solution8 : Success!" << endl;
-    }else{
-      cout << "Solution8 : Fail!" << endl;
-    }
+  Sol[0][5] = Theta6_1_1;
+  Sol[1][5] = Theta6_1_2;
+  Sol[2][5] = Theta6_2_1;
+  Sol[3][5] = Theta6_2_2;
+  Sol[4][5] = Theta6_3_1;
+  Sol[5][5] = Theta6_3_2;
+  Sol[6][5] = Theta6_4_1;
+  Sol[7][5] = Theta6_4_2;
+  
 }
 
 void Ikine::getT0_3()
@@ -185,5 +173,6 @@ void Ikine::getIkine()
   getCosTheta4();
   getCosTheta5();
   getCosTheta6();
+  fillSol();
   checkTheta4_6();
 }
