@@ -438,5 +438,9 @@ void Ikine::getIkine()
   checkTheta4_6();
   fillSolR();
   getT0_3();
+  getTheta1_3(T0_3_1, 1);
+  getTheta1_3(T0_3_2, 2);
+  getTheta1_3(T0_3_3, 3);
+  getTheta1_3(T0_3_4, 4);
   //getT0_3test();
 }
