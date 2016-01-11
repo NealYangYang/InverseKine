@@ -10,6 +10,12 @@ class Ikine
   double T0_3[4][4];
   double Sol[8][6];   //解过度矩阵
   double SolR[8][6];   //最终解矩阵
+
+  /*四组T0_3*/
+  double T0_3_1[4][4];
+  double T0_3_2[4][4];
+  double T0_3_3[4][4];
+  double T0_3_4[4][4];
   
   /***机械臂参数***/
   double Lu;

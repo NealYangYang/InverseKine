@@ -186,9 +186,11 @@ void Ikine::fillSolR()
 
 void Ikine::getT0_3()
 {
-  int i = 2;
+ 
   int m = 4;
   int n = 4;
+  for ( int i = 0; i<4; i++)
+    {
   double T6_3[4][4] =
     {
       {cos(SolR[i][3])*cos(SolR[i][4])*cos(SolR[i][5])+sin(SolR[i][3])*sin(SolR[i][5]), -sin(SolR[i][4])*cos(SolR[i][5]), -sin(SolR[i][3])*cos(SolR[i][4])*cos(SolR[i][5])+cos(SolR[i][3])*sin(SolR[i][5]), Lf*sin(SolR[i][5])},
@@ -198,6 +200,7 @@ void Ikine::getT0_3()
     };
   
   //输出测试
+  /*
   cout << "T6_3 :" << endl;
     for (int i = 0; i < 4; i++ )
     {
@@ -210,8 +213,8 @@ void Ikine::getT0_3()
 	    }
 	}
     }
-  
-  
+  */
+    
    Matrix a(4,4);
    for(int i=0;i<m;i++)//动态数组赋值
      for(int j=0;j<n;j++)
@@ -220,14 +223,62 @@ void Ikine::getT0_3()
    Matrix b(4,4);
    for(int i=0;i<m;i++)//动态数组赋值
      for(int j=0;j<n;j++)
+       {
        b.data[i][j]=T6_3[i][j];
+       }
 
    Matrix c = a * b;
-   for(int i=0;i<m;i++)//动态数组赋值
-     for(int j=0;j<n;j++)
-       T0_3[i][j]=c.data[i][j];
+   
+   switch(i)
+     {
+     case 0:
+	for(int i=0;i<m;i++)//动态数组赋值
+	  for(int j=0;j<n;j++)
+	    {
+	    T0_3_1[i][j]=c.data[i][j];
+	    }
+	cout << "T0_3_1 :"  << endl;
+	c.display();
+	cout << endl;
+	break;
+     case 1:
+	for(int i=0;i<m;i++)//动态数组赋值
+	  for(int j=0;j<n;j++)
+	    {
+	    T0_3_2[i][j]=c.data[i][j];
+	    }
+	cout << "T0_3_2 :"  << endl;
+	c.display();
+	cout << endl;
+	break;
+     case 2:
+	for(int i=0;i<m;i++)//动态数组赋值
+	  for(int j=0;j<n;j++)
+	    {
+	    T0_3_3[i][j]=c.data[i][j];
+	    }
+	cout << "T0_3_3 :"  << endl;
+	c.display();
+	cout << endl;
+	break;
+     case 3:
+	for(int i=0;i<m;i++)//动态数组赋值
+	  for(int j=0;j<n;j++)
+	    {
+	    T0_3_4[i][j]=c.data[i][j];
+	    }
+	cout << "T0_3_4 :"  << endl;
+	c.display();
+	cout << endl;
+	break;
+     default:
+       break;
 
+       
+     }
+   
      //输出测试
+  /*
   cout << "T0_3 :" << endl;
     for (int i = 0; i < 4; i++ )
     {
@@ -240,7 +291,8 @@ void Ikine::getT0_3()
 	    }
 	}
     }
-
+  */
+    }
 }
 
 void Ikine::getT0_3test()
@@ -275,49 +327,72 @@ void Ikine::getT0_3test()
 
 void Ikine::getTheta1_3()
 {
-  double a;
-  double b;
-  double c;
-  double a1,b1,c1;
-b = atan2( -T0_3[ 2 ][ 0 ], sqrt( T0_3[0][0]*T0_3[0][0]+T0_3[1][0]*T0_3[1][0]) );
+  double b_1, b_2;
+  double a_1_1, a_1_2, a_2_1, a_2_2;
+  double c_1_1, c_1_2, c_2_1, c_2_2;
+  /*
+  b_1 = acos(T0_3[2][2]);
+  b_2 = -b_1;
 
- if (fabs(b * 180 / M_PI - 90) < 0.01 )
+  a_1_1 = asin(T0_3[1][2]/sin(b_1));
+  if (a_1_1 > 0.0 )
     {
-      a = 0;
-      c = atan2( T0_3[0][1], T0_3[1][1] );
-    }else if (fabs(b * 180 / M_PI  + 90) < 0.01 )
-    {
-      a = 0;
-      c = -atan2( T0_3[0][1], T0_3[1][1] );
+      a_1_2 = M_PI-a_1_1;
     }else{
-    a = atan2( T0_3[1][0] / cos(b), T0_3[0][0] / cos(b) );
-    c = atan2( T0_3[2][1] / cos(b), T0_3[2][2] / cos(b) );
+    a_1_2 = -(M_PI+a_1_1);
   }
 
- b1 = atan2( -T0_3[ 2 ][ 0 ], -sqrt( T0_3[0][0]*T0_3[0][0]+T0_3[1][0]*T0_3[1][0]) );
-
- if (fabs(b1 * 180 / M_PI - 90) < 0.01 )
+    a_2_1 = asin(T0_3[1][2]/sin(b_2));
+  if (a_2_1 > 0.0 )
     {
-      a1 = 0;
-      c1 = atan2( T0_3[0][1], T0_3[1][1] );
-    }else if (fabs(b1 * 180 / M_PI  + 90) < 0.01 )
-    {
-      a1 = 0;
-      c1 = -atan2( T0_3[0][1], T0_3[1][1] );
+      a_2_2 = M_PI-a_2_1;
     }else{
-    a1 = atan2( T0_3[1][0] / cos(b1), T0_3[0][0] / cos(b1) );
-    c1 = atan2( T0_3[2][1] / cos(b1), T0_3[2][2] / cos(b1) );
+    a_2_2 = -(M_PI+a_2_1);
+  }
+
+   c_1_1 = asin(T0_3[2][1]/sin(b_1));
+  if (c_1_1 > 0.0 )
+    {
+      c_1_2 = M_PI-c_1_1;
+    }else{
+    c_1_2 = -(M_PI+c_1_1);
+  }
+
+    c_2_1 = asin(T0_3[2][1]/sin(b_2));
+  if (c_2_1 > 0.0 )
+    {
+      c_2_2 = M_PI-c_2_1;
+    }else{
+    c_2_2 = -(M_PI+c_2_1);
   }
   
-  Theta1_1 = a1;
-  Theta2_1 = b1;
-  Theta3_1 = c1;
 
-  Theta1_2 = a;
-  Theta2_2 = b;
-  Theta3_2 = c;
+  SolR[0][0] = a_1_1;
+  SolR[0][1] = b_1;
+  SolR[0][2] = c_1_1;
+  SolR[1][0] = a_1_1;
+  SolR[1][1] = b_1;
+  SolR[1][2] = c_1_2;
+  SolR[2][0] = a_1_2;
+  SolR[2][1] = b_1;
+  SolR[2][2] = c_1_1;
+  SolR[3][0] = a_1_2;
+  SolR[3][1] = b_1;
+  SolR[3][2] = c_1_2;
 
-  
+  SolR[4][0] = a_2_1;
+  SolR[4][1] = b_2;
+  SolR[4][2] = c_2_1;
+  SolR[5][0] = a_2_1;
+  SolR[5][1] = b_2;
+  SolR[5][2] = c_2_2;
+  SolR[6][0] = a_2_2;
+  SolR[6][1] = b_2;
+  SolR[6][2] = c_2_1;
+  SolR[7][0] = a_2_2;
+  SolR[7][1] = b_2;
+  SolR[7][2] = c_2_2;
+  */
 }
 
 void Ikine::getIkine()

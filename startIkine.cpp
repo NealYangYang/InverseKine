@@ -53,19 +53,20 @@ int main()
   fkine.showResult();
 
   cout << endl;
-  cout << ikine.Theta1_1 * 180 / M_PI << endl;
-  cout << ikine.Theta2_1 * 180 / M_PI << endl;
-  cout << ikine.Theta3_1 * 180 / M_PI << endl;
+ for ( int i = 0; i < 8; i ++ )
+    {
+      cout << "****RealSolution" << i+1 << "****" << endl;
+      for ( int j = 0; j < 3; j ++ )
+	{
+	  cout << "Theta" << j+1 << " :"  << ikine.SolR[i][j]* 180 / M_PI  << endl;}
+      cout << endl;
+    }
   cout << endl;
-  cout << ikine.Theta1_2 * 180 / M_PI << endl;
-  cout << ikine.Theta2_2 * 180 / M_PI << endl;
-  cout << ikine.Theta3_2 * 180 / M_PI << endl;
-  cout << endl;
-  
+  /*
   cout << ikine.alfa *180/M_PI<< endl;
   cout << ikine.beta *180/M_PI << endl;
   cout << ikine.gama *180/M_PI << endl;
- 
+  */
   /*
     for (int i = 0; i < 4; i++ )
     {
