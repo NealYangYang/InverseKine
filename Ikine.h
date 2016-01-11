@@ -70,7 +70,7 @@ class Ikine
   void fillSolR();
   void getT0_3();
   void getT0_3test();
-  void getTheta1_3();
+  void getTheta1_3( double T0_3[4][4], int flagN);
   void getIkine();
  private:
   double matrixOfSix[ 4 ][ 4 ];   //坐标系6矩阵

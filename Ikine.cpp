@@ -325,12 +325,13 @@ void Ikine::getT0_3test()
     }
 }
 
-void Ikine::getTheta1_3()
+void Ikine::getTheta1_3( double T0_3[4][4], int flagN)
 {
   double b_1, b_2;
   double a_1_1, a_1_2, a_2_1, a_2_2;
   double c_1_1, c_1_2, c_2_1, c_2_2;
-  /*
+  flagN = flagN-1;
+  
   b_1 = acos(T0_3[2][2]);
   b_2 = -b_1;
 
@@ -366,33 +367,64 @@ void Ikine::getTheta1_3()
     c_2_2 = -(M_PI+c_2_1);
   }
   
+  double Theta1_3[8][3];
+  Theta1_3[0][0] = a_1_1;
+  Theta1_3[0][1] = b_1;
+  Theta1_3[0][2] = c_1_1;
+  Theta1_3[1][0] = a_1_1;
+  Theta1_3[1][1] = b_1;
+  Theta1_3[1][2] = c_1_2;
+  Theta1_3[2][0] = a_1_2;
+  Theta1_3[2][1] = b_1;
+  Theta1_3[2][2] = c_1_1;
+  Theta1_3[3][0] = a_1_2;
+  Theta1_3[3][1] = b_1;
+  Theta1_3[3][2] = c_1_2;
 
-  SolR[0][0] = a_1_1;
-  SolR[0][1] = b_1;
-  SolR[0][2] = c_1_1;
-  SolR[1][0] = a_1_1;
-  SolR[1][1] = b_1;
-  SolR[1][2] = c_1_2;
-  SolR[2][0] = a_1_2;
-  SolR[2][1] = b_1;
-  SolR[2][2] = c_1_1;
-  SolR[3][0] = a_1_2;
-  SolR[3][1] = b_1;
-  SolR[3][2] = c_1_2;
+  Theta1_3[4][0] = a_2_1;
+  Theta1_3[4][1] = b_2;
+  Theta1_3[4][2] = c_2_1;
+  Theta1_3[5][0] = a_2_1;
+  Theta1_3[5][1] = b_2;
+  Theta1_3[5][2] = c_2_2;
+  Theta1_3[6][0] = a_2_2;
+  Theta1_3[6][1] = b_2;
+  Theta1_3[6][2] = c_2_1;
+  Theta1_3[7][0] = a_2_2;
+  Theta1_3[7][1] = b_2;
+  Theta1_3[7][2] = c_2_2;
 
-  SolR[4][0] = a_2_1;
-  SolR[4][1] = b_2;
-  SolR[4][2] = c_2_1;
-  SolR[5][0] = a_2_1;
-  SolR[5][1] = b_2;
-  SolR[5][2] = c_2_2;
-  SolR[6][0] = a_2_2;
-  SolR[6][1] = b_2;
-  SolR[6][2] = c_2_1;
-  SolR[7][0] = a_2_2;
-  SolR[7][1] = b_2;
-  SolR[7][2] = c_2_2;
-  */
+  double error11;
+  double error12;
+  double error21;
+  double error22;
+  int flagM = 0;
+  
+  for ( int i = 0; i < 8; i++ )
+    {
+      
+      error11 = fabs(cos(Theta1_3[i][0])*cos(Theta1_3[i][1])*cos(Theta1_3[i][2])-sin(Theta1_3[i][0])*sin(Theta1_3[i][2]) - T0_3[0][0]);
+      error12 = fabs(-cos(Theta1_3[i][0])*cos(Theta1_3[i][1])*sin(Theta1_3[i][2])-sin(Theta1_3[i][0])*cos(Theta1_3[i][2]) - T0_3[0][1]);
+      error21 = fabs(sin(Theta1_3[i][0])*cos(Theta1_3[i][1])*cos(Theta1_3[i][2])+cos(Theta1_3[i][0])*sin(Theta1_3[i][2]) - T0_3[1][0]);
+      error22 = fabs(-sin(Theta1_3[i][0])*cos(Theta1_3[i][1])*sin(Theta1_3[i][2])+cos(Theta1_3[i][0])*cos(Theta1_3[i][2]) - T0_3[1][1]);
+            
+      if ((error11<0.01) && (error12<0.01) && (error21<0.01) && (error22<0.01))
+	{
+	  if (flagM == 0)
+	    {
+	      SolR[flagN][0] = Theta1_3[i][0];
+	      SolR[flagN][1] = Theta1_3[i][1];
+	      SolR[flagN][2] = Theta1_3[i][2];
+	      flagM =1;
+	    }else{
+	    SolR[flagN+4][0] = Theta1_3[i][0];
+	    SolR[flagN+4][1] = Theta1_3[i][1];
+	    SolR[flagN+4][2] = Theta1_3[i][2];
+	  }
+	}
+      
+    } 
+  
 }
 
 void Ikine::getIkine()
@@ -406,6 +438,5 @@ void Ikine::getIkine()
   checkTheta4_6();
   fillSolR();
   getT0_3();
-  getTheta1_3();
-  getT0_3test();
+  //getT0_3test();
 }
