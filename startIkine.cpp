@@ -12,6 +12,12 @@ using std::setw;
 
 int main()
 {
+  //fkine to get a meaningful object matrix
+  Fkine fkine;
+  fkine.getFkine(1,-91,1,-91,46,1);
+  fkine.showResult();
+  
+  //Setup object matrix
   double matrix[4][4] = 
     {
       {-0.681074,      0.0470896,       0.730698,       -52.4485},
@@ -20,17 +26,17 @@ int main()
       {0,0,0,1}
       
     };
-  
-  Ikine ikine( 50.0, 70.0 );
-  ikine.setMatrix( matrix );
-  ikine.getIkine();
 
-  Fkine fkine;
-  fkine.getFkine(1,-91,1,-91,46,1);
-  fkine.showResult();
-  
+  //state ikine
+  Ikine ikine( 50.0, 70.0 );   //Lu,Lf
+
+  //ikine calculation
+  ikine.setMatrix( matrix );   //input the object matrix
+  ikine.getIkine();   //calculate the ikine
+
+  //print the result from ikine.SoR[][]
   cout << endl;
- for ( int i = 0; i < 8; i ++ )
+  for ( int i = 0; i < 8; i ++ )
     {
       cout << "****RealSolution" << i+1 << "****" << endl;
       for ( int j = 0; j < 6; j ++ )
@@ -40,7 +46,8 @@ int main()
     }
   cout << endl;
   
-  
+  //print the fkine of all eight sets of solutions 
+  //in order to verify them
   for ( int i = 0; i < 8; i ++)
     {
       fkine.getFkine(ikine.SolR[i][0]*180/M_PI,ikine.SolR[i][1]*180/M_PI,ikine.SolR[i][2]*180/M_PI,ikine.SolR[i][3]*180/M_PI,ikine.SolR[i][4]*180/M_PI,ikine.SolR[i][5]*180/M_PI);

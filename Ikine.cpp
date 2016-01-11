@@ -237,9 +237,9 @@ void Ikine::getT0_3()
 	    {
 	    T0_3_1[i][j]=c.data[i][j];
 	    }
-	cout << "T0_3_1 :"  << endl;
-	c.display();
-	cout << endl;
+	//cout << "T0_3_1 :"  << endl;
+	//c.display();
+	//cout << endl;
 	break;
      case 1:
 	for(int i=0;i<m;i++)//动态数组赋值
@@ -247,9 +247,9 @@ void Ikine::getT0_3()
 	    {
 	    T0_3_2[i][j]=c.data[i][j];
 	    }
-	cout << "T0_3_2 :"  << endl;
-	c.display();
-	cout << endl;
+	//cout << "T0_3_2 :"  << endl;
+	//c.display();
+	//cout << endl;
 	break;
      case 2:
 	for(int i=0;i<m;i++)//动态数组赋值
@@ -257,9 +257,9 @@ void Ikine::getT0_3()
 	    {
 	    T0_3_3[i][j]=c.data[i][j];
 	    }
-	cout << "T0_3_3 :"  << endl;
-	c.display();
-	cout << endl;
+	//cout << "T0_3_3 :"  << endl;
+	//c.display();
+	//cout << endl;
 	break;
      case 3:
 	for(int i=0;i<m;i++)//动态数组赋值
@@ -267,9 +267,9 @@ void Ikine::getT0_3()
 	    {
 	    T0_3_4[i][j]=c.data[i][j];
 	    }
-	cout << "T0_3_4 :"  << endl;
-	c.display();
-	cout << endl;
+	//cout << "T0_3_4 :"  << endl;
+	//c.display();
+	//cout << endl;
 	break;
      default:
        break;
@@ -311,6 +311,7 @@ void Ikine::getT0_3test()
     };
 
    //输出测试
+  /*
   cout << "T0_3test :" << endl;
     for (int i = 0; i < 4; i++ )
     {
@@ -323,6 +324,7 @@ void Ikine::getT0_3test()
 	    }
 	}
     }
+  */
 }
 
 void Ikine::getTheta1_3( double T0_3[4][4], int flagN)
