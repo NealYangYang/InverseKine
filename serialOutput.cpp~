@@ -1,0 +1,28 @@
+#include <iostream>
+using std::endl;
+using std::cout;
+
+#include "serialOutput.h"
+
+MotorOutput(double angle[6])
+{
+  double minAngle = -135;
+  double maxAngle = 135;
+  double minAngleNum = 3500;
+  double stdAngleNum = 7500;
+  double maxAngleNum = 11500;
+
+  //raw angle to angle number
+  for (int i = 0; i < 6; i++)
+    {
+      if(angle[i] < 0)
+	{
+	  angle1[i] = stdAngleNum - angle[i] / minAngle * (maxAngleNum - minAngleNum);
+	}else{
+	angle1[i] = stdAngleNum + angle[i] /maxAngle * (maxAngleNum - minAngleNum);
+      }    
+    }
+
+  //
+  
+}

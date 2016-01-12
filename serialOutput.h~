@@ -1,0 +1,24 @@
+#include <iostream>
+using std::endl;
+using std::cout;
+
+class MotorOutput
+{
+ public:
+  MotorOutput(double angle[6]);
+  
+
+  
+ private:
+  double angle1[6];
+  char serialOutputICS[10];
+  char serialOuputServo[4];
+  double minAngle;
+  double maxAngle;
+  double minAngleNum;
+  double stdAngleNum;
+  double maxAngleNum;
+  
+  
+  
+};
