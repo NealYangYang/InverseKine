@@ -18,7 +18,5 @@ int main()
     }
 
   cout << endl;
-
-  output.calPosition(9000);
   return 0;
 }

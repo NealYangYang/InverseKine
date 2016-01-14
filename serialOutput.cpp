@@ -1,7 +1,6 @@
 #include <iostream>
 using std::endl;
 using std::cout;
-using std::hex;
 
 #include "serialOutput.h"
 
@@ -27,9 +26,9 @@ void MotorOutput::setPosition(double angle[6])
     {
       if(angle[i] < 0)
 	{
-	  angle1[i] = (int)(stdAngleNum - angle[i] / minAngle * (maxAngleNum - stdAngleNum));
+	  angle1[i] = (int)(stdAngleNum - angle[i] / minAngle * (maxAngleNum - minAngleNum));
 	}else{
-	angle1[i] = (int)(stdAngleNum + angle[i] /maxAngle * (maxAngleNum - stdAngleNum));
+	angle1[i] = (int)(stdAngleNum + angle[i] /maxAngle * (maxAngleNum - minAngleNum));
       }    
     }
   
@@ -55,12 +54,4 @@ void MotorOutput::setPosition(double angle[6])
 
   serialOutputICS[8] = (m2[1][0] >> 7) & 0x7F;
   serialOutputICS[9] = m2[1][0] & 0x7f;
-}
-
-void MotorOutput::calPosition(int angle)
-{
-  int H = (angle >> 7) & 0x7F;
-  int L = angle & 0x7f;
-  cout << "H :" << hex << H << endl;
-  cout << "L :" << hex << L << endl;
 }
