@@ -1,99 +1,1 @@
-#include <iostream>
-using std::endl;
-using std::cout;
-using std::cin;
-
-#include "Matrix.h"
-
-Matrix::Matrix(int mm, int nn)//æ„é€ å‡½æ•°
-    {
-        m=mm;
-        n=nn;
-        int i,j;
-        data=new double*[mm];
-        for(i=0;i<mm;i++)
-            data[i]=new double[nn];
-        for(i=0;i<m;i++)//çŸ©é˜µæ‰€æœ‰å…ƒç´ æ¸…é›¶
-            for(j=0;j<n;j++)
-                data[i][j]=0.0;
-    } //æ„é€ Mè¡ŒNåˆ—çš„çŸ©é˜µ
-
-Matrix::Matrix(const Matrix &src) //æ‹·è´æ„é€ å‡½æ•°
-    {
-        m=src.m;
-        n=src.n;
-          int i,j;
-        data=new double*[m];//åŠ¨æ€å»ºç«‹äºŒç»´æ•°ç»„
-        for(i=0;i<m;i++)
-            data[i]=new double[n];
-        for(i=0;i<m;i++)//åŠ¨æ€æ•°ç»„èµ‹å€¼
-            for(j=0;j<n;j++)
-                data[i][j]=src.data[i][j];
-    }
-
-Matrix::~Matrix()//ææ„å‡½æ•°
-    {
-        for(int i=0;i<m;i++)
-            delete []data[i];
-        delete []data;
-    }
-
-Matrix& Matrix::operator=(const Matrix &src) //é‡è½½"="è¿ç®—ç¬¦
-{
-    int i,j;
-    for(i=0;i<m;i++)
-        delete []data[i];
-    delete []data;
-    m=src.m;n=src.n;
-    data=new double*[m];//åŠ¨æ€å»ºç«‹äºŒç»´æ•°ç»„
-    for(i=0;i<m;i++)
-        data[i]=new double[n];
-    for(i=0;i<m;i++)
-        for(j=0;j<n;j++)
-            data[i][j]=src.data[i][j];
-    return *this;
-}
-
-//çŸ©é˜µ*è¿ç®—ç¬¦é‡è½½
-Matrix Matrix::operator *(const Matrix &m2)//çŸ©é˜µä¹˜æ³•çš„å®ç°
-{
-    Matrix m3(this->m,m2.n);
-    if(this->n!=m2.m)
-    {
-        cout<<"ä¸¤çŸ©é˜µæ— æ³•è¿›è¡Œä¹˜æ³•è¿ç®—.\n"<<endl;
-        exit(0);
-    }
-    int i,j,k,l;
-    for(i=0;i<this->m;i++)
-        for(j=0;j<m2.n;j++)
-        {
-            for(k=0;k<this->n;k++)
-             {
-                m3.data[i][j]+=this->data[i][k]*m2.data[k][j];
-             }
-
-        }
-    return m3;
-}
-
-//è¾“å…¥çŸ©é˜µå…ƒç´ 
-void Matrix::input()
-{
-    for(int i=0;i<m;i++)
-        for(int j=0;j<n;j++)
-            cin>>data[i][j];
-}
-
-//æ˜¾ç¤ºçŸ©é˜µå…ƒç´ 
-void Matrix::display()
-{
-    int i,j;
-    for(i=0;i<m;i++)
-    {
-        for(j=0;j<n;j++)
-        {
-            cout<<data[i][j]<<" ";
-        }
-        cout<<endl;
-    }
-}
+#include "stdafx.h"#define _USE_MATH_DEFINES#include <iostream>using std::endl;using std::cout;using std::cin;#include "Matrix.h"Matrix::Matrix(int mm, int nn)//¹¹Ôìº¯Êı    {        m=mm;        n=nn;        int i,j;        data=new double*[mm];        for(i=0;i<mm;i++)            data[i]=new double[nn];        for(i=0;i<m;i++)//¾ØÕóËùÓĞÔªËØÇåÁã            for(j=0;j<n;j++)                data[i][j]=0.0;    } //¹¹ÔìMĞĞNÁĞµÄ¾ØÕóMatrix::Matrix(const Matrix &src) //¿½±´¹¹Ôìº¯Êı    {        m=src.m;        n=src.n;          int i,j;        data=new double*[m];//¶¯Ì¬½¨Á¢¶şÎ¬Êı×é        for(i=0;i<m;i++)            data[i]=new double[n];        for(i=0;i<m;i++)//¶¯Ì¬Êı×é¸³Öµ            for(j=0;j<n;j++)                data[i][j]=src.data[i][j];    }Matrix::~Matrix()//Îö¹¹º¯Êı    {        for(int i=0;i<m;i++)            delete []data[i];        delete []data;    }Matrix& Matrix::operator=(const Matrix &src) //ÖØÔØ"="ÔËËã·û{    int i,j;    for(i=0;i<m;i++)        delete []data[i];    delete []data;    m=src.m;n=src.n;    data=new double*[m];//¶¯Ì¬½¨Á¢¶şÎ¬Êı×é    for(i=0;i<m;i++)        data[i]=new double[n];    for(i=0;i<m;i++)        for(j=0;j<n;j++)            data[i][j]=src.data[i][j];    return *this;}//¾ØÕó*ÔËËã·ûÖØÔØMatrix Matrix::operator *(const Matrix &m2)//¾ØÕó³Ë·¨µÄÊµÏÖ{    Matrix m3(this->m,m2.n);    if(this->n!=m2.m)    {        cout<<"Á½¾ØÕóÎŞ·¨½øĞĞ³Ë·¨ÔËËã.\n"<<endl;        exit(0);    }    int i,j,k,l;    for(i=0;i<this->m;i++)        for(j=0;j<m2.n;j++)        {            for(k=0;k<this->n;k++)             {                m3.data[i][j]+=this->data[i][k]*m2.data[k][j];             }        }    return m3;}//ÊäÈë¾ØÕóÔªËØvoid Matrix::input(){    for(int i=0;i<m;i++)        for(int j=0;j<n;j++)            cin>>data[i][j];}//ÏÔÊ¾¾ØÕóÔªËØvoid Matrix::display(){    int i,j;    for(i=0;i<m;i++)    {        for(j=0;j<n;j++)        {            cout<<data[i][j]<<" ";        }        cout<<endl;    }}

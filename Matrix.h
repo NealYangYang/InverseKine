@@ -1,20 +1,1 @@
-#include <iostream>
-using std::endl;
-using std::cout;
-using std::cin;
-
-class Matrix
-{
- public:
-  Matrix(int mm, int nn);//æ„é€ å‡½æ•°
-  Matrix(const Matrix &src); //æ‹·è´æ„é€ å‡½æ•°
-  ~Matrix();//ææ„å‡½æ•°
-  Matrix& operator=(const Matrix &src);//é‡è½½"="è¿ç®—ç¬¦
-  Matrix operator * (const Matrix &m2); //çŸ©é˜µä¹˜æ³•
-  void display();
-  void input();
-  double **data;
-  int m,n;
- private:
-  
-};
+#include <iostream>using std::endl;using std::cout;using std::cin;class Matrix{ public:  Matrix(int mm, int nn);//¹¹Ôìº¯Êı  Matrix(const Matrix &src); //¿½±´¹¹Ôìº¯Êı  ~Matrix();//Îö¹¹º¯Êı  Matrix& operator=(const Matrix &src);//ÖØÔØ"="ÔËËã·û  Matrix operator * (const Matrix &m2); //¾ØÕó³Ë·¨  void display();  void input();  double **data;  int m,n; private:  };

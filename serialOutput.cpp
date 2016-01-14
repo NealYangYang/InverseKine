@@ -1,57 +1,1 @@
-#include <iostream>
-using std::endl;
-using std::cout;
-
-#include "serialOutput.h"
-
-MotorOutput::MotorOutput(int pos1, int pos2, int pos3, int pos4)
-{
-  minAngle = -135;
-  maxAngle = 135;
-  minAngleNum = 3500;
-  stdAngleNum = 7500;
-  maxAngleNum = 11500;
-  initPos1 = pos1;
-  initPos2 = pos2;
-  initPos3 = pos3;
-  initPos4 = pos4;
-  
-}
-
-void MotorOutput::setPosition(double angle[6])
-{
-
-  int angle1[10];
-  for (int i = 0; i < 4; i++)
-    {
-      if(angle[i] < 0)
-	{
-	  angle1[i] = (int)(stdAngleNum - angle[i] / minAngle * (maxAngleNum - minAngleNum));
-	}else{
-	angle1[i] = (int)(stdAngleNum + angle[i] /maxAngle * (maxAngleNum - minAngleNum));
-      }    
-    }
-  
-  int q1[3][1]={{angle1[0]},{angle1[1]},{1}};
-  int e1[2][3]={{-1,-1,initPos1},{-1,1,initPos2}};
-  int m1[2][1]={{q1[0][0]*e1[0][0]+q1[1][0]*e1[0][1]+q1[2][0]*e1[0][2]},{q1[0][0]*e1[1][0]+q1[1][0]*e1[1][1]+q1[2][0]*e1[1][2]}};
-
-  int q2[3][1]={{angle1[2]},{angle1[3]},{1}};
-  int e2[2][3]={{-1,-1,initPos3},{-1,1,initPos4}};
-  int m2[2][1]={{q2[0][0]*e2[0][0]+q2[1][0]*e2[0][1]+q2[2][0]*e2[0][2]},{q2[0][0]*e2[1][0]+q2[1][0]*e2[1][1]+q2[2][0]*e2[1][2]}};
-
-  serialOutputICS[0] = 0x40;
-  serialOutputICS[1] = 0x5c;
-  
-  serialOutputICS[2] = (m1[0][0] >> 7) & 0x7F;
-  serialOutputICS[3] = m1[0][0] & 0x7f;
-
-  serialOutputICS[4] = (m1[1][0] >> 7) & 0x7F;
-  serialOutputICS[5] = m1[1][0] & 0x7f;
-
-  serialOutputICS[6] = (m2[0][0] >> 7) & 0x7F;
-  serialOutputICS[7] = m2[0][0] & 0x7f;
-
-  serialOutputICS[8] = (m2[1][0] >> 7) & 0x7F;
-  serialOutputICS[9] = m2[1][0] & 0x7f;
-}
+#include "stdafx.h"#define _USE_MATH_DEFINES#include <iostream>using std::endl;using std::cout;#include "serialOutput.h"MotorOutput::MotorOutput(int pos1, int pos2, int pos3, int pos4){  minAngle = -135;  maxAngle = 135;  minAngleNum = 3500;  stdAngleNum = 7500;  maxAngleNum = 11500;  minAngleSer = -130;  maxAngleSer = 130;  minAngleSerNum = 8;  stdAngleSerNum = 119;  maxAngleSerNum = 230;  initPos1 = pos1;  initPos2 = pos2;  initPos3 = pos3;  initPos4 = pos4;  initPos5 = 119;  initPos6 = 119;  }void MotorOutput::setPosition(double angle[6]){  int angle1[6];  //init error payback  angle[1] = angle[1] + 90.0;  angle[3] = angle[3] + 90.0;  //ICS Motors  for (int i = 0; i < 4; i++)    {      if(angle[i] < 0)	{	  angle1[i] = (int)(stdAngleNum - angle[i] / minAngle * (maxAngleNum - stdAngleNum)-stdAngleNum);	}else{	angle1[i] = (int)(stdAngleNum + angle[i] / maxAngle * (maxAngleNum - stdAngleNum)-stdAngleNum);      }        }  //Servo Motors  for (int i = 4; i < 6; i ++)  {	  if(angle[i] < 0)	  {		angle1[i] = (int)(stdAngleSerNum - angle[i] / minAngleSer * (maxAngleSerNum - stdAngleSerNum) -stdAngleSerNum);	  }else{	    angle1[i] = (int)(stdAngleSerNum + angle[i] / maxAngleSer * (maxAngleSerNum - stdAngleSerNum) -stdAngleSerNum);	  }   }  //ICS Motors transform  int q1[3][1]={{angle1[0]},{angle1[1]},{1}};  int e1[2][3]={{-1,1,initPos1},{-1,-1,initPos2}};  int m1[2][1]={{q1[0][0]*e1[0][0]+q1[1][0]*e1[0][1]+q1[2][0]*e1[0][2]},{q1[0][0]*e1[1][0]+q1[1][0]*e1[1][1]+q1[2][0]*e1[1][2]}};  int q2[3][1]={{angle1[2]},{angle1[3]},{1}};  int e2[2][3]={{-1,-1,initPos3},{-1,1,initPos4}};  int m2[2][1]={{q2[0][0]*e2[0][0]+q2[1][0]*e2[0][1]+q2[2][0]*e2[0][2]},{q2[0][0]*e2[1][0]+q2[1][0]*e2[1][1]+q2[2][0]*e2[1][2]}};  //Servo Motors transform  int q3[3][1]={{angle1[4]},{angle1[5]},{1}};  int e3[2][3]={{1,1,initPos5},{1,-1,initPos6}};  int m3[2][1]={{q3[0][0]*e3[0][0]+q3[1][0]*e3[0][1]+q3[2][0]*e3[0][2]},{q3[0][0]*e3[1][0]+q3[1][0]*e3[1][1]+q3[2][0]*e3[1][2]}};  //ICS Motors serial data  serialOutputICS[0] = 0x4B;  serialOutputICS[1] = 0x50;    serialOutputICS[2] = (m1[0][0] >> 7) & 0x7F;  serialOutputICS[3] = m1[0][0] & 0x7f;  serialOutputICS[4] = (m1[1][0] >> 7) & 0x7F;  serialOutputICS[5] = m1[1][0] & 0x7f;  serialOutputICS[6] = (m2[0][0] >> 7) & 0x7F;  serialOutputICS[7] = m2[0][0] & 0x7f;  serialOutputICS[8] = (m2[1][0] >> 7) & 0x7F;  serialOutputICS[9] = m2[1][0] & 0x7f;  serialOutputICS[10] = 0x4d;  serialOutputICS[11] = 0x50;  serialOutputICS[12] = m3[0][0];  serialOutputICS[13] = m3[1][0];  //Servo Motors serial data /* serialOutputServo[0] = 0x4d;  serialOutputServo[1] = 0x50;  serialOutputServo[2] = 0x10;  serialOutputServo[3] = 0x20;*/}void MotorOutput::linkTwo(){	for(int i = 0; i < 10; i ++)	{	serialOutput[i] = serialOutputICS[i];	}	for(int i = 0; i < 18; i ++)	{	serialOutput[i+10] = serialOutputServo[i];	}}

@@ -1,78 +1,1 @@
-#include <iostream>
-using std::cout;
-using std::endl;
-
-class Ikine
-{
- public:
-  double R0_6[3][3];   //æ—‹è½¬çŸ©é˜µR0_6
-  double T0_6[4][4];   //è½¬æ¢çŸ©é˜µT0_6
-  double T0_3[4][4];
-  double Sol[8][6];   //è§£è¿‡åº¦çŸ©é˜µ
-  double SolR[8][6];   //æœ€ç»ˆè§£çŸ©é˜µ
-
-  /*å››ç»„T0_3*/
-  double T0_3_1[4][4];
-  double T0_3_2[4][4];
-  double T0_3_3[4][4];
-  double T0_3_4[4][4];
-  
-  /***æœºæ¢°è‡‚å‚æ•°***/
-  double Lu;
-  double Lf;
-  
-  /***Eulerè§’ ***/
-  double alfa;
-  double beta;
-  double gama;
-
-  /***å‰ä¸‰è½´äº¤ç‚¹åœ¨åæ ‡ç³»6ä¸­çš„ä½ç½®çŸ©é˜µ***/
-  double Q6_0[4][1];
-
-  /***ç›®æ ‡è§’åº¦***/
-  double Theta1_1;
-  double Theta2_1;
-  double Theta3_1;
-
-  double Theta1_2;
-  double Theta2_2;
-  double Theta3_2;
-
-
-  
-  double Theta4_1;
-  double Theta4_2;
-  
-  double Theta5_1_1;
-  double Theta5_1_2;
-  double Theta5_2_1;
-  double Theta5_2_2;
-  
-  double Theta6_1_1;
-  double Theta6_1_2;
-  double Theta6_2_1;
-  double Theta6_2_2;
-  double Theta6_3_1;
-  double Theta6_3_2;
-  double Theta6_4_1;
-  double Theta6_4_2;
-  double error;   //åˆ¤æ–­Theta4,5,6æ˜¯å¦æ­£ç¡®åœ°è¯¯å·®å€¼
-  int flag;   //åˆ¤æ–­å®Œæˆåæ­£è§£çš„ä½ç½®ï¼Œ0ä»£è¡¨1.3.5.7  1ä»£è¡¨2.4.6.8
-  Ikine( double lu, double lf );   //æ„é€ å‡½æ•°ï¼Œåˆå§‹åŒ–åŒæ—¶æå–æ—‹xè½¬çŸ©é˜µ
-  void setMatrix(double inputmatrix[4][4]);
-  void getEulerAngle();   //è®¡ç®—ä¸æ—‹è½¬çŸ©é˜µå¯¹åº”çš„Eulerè§’
-  void getQ6_0();    //è®¡ç®—å‰ä¸‰è½´äº¤ç‚¹åœ¨åæ ‡ç³»6ä¸­çš„ä½ç½®çŸ©é˜µ
-  void getCosTheta4();
-  void getCosTheta5();
-  void getCosTheta6();
-  void checkTheta4_6();
-  void fillSol();   //å°†è§£èµ‹å€¼åˆ°çŸ©é˜µä¸­
-  void fillSolR();
-  void getT0_3();
-  void getT0_3test();
-  void getTheta1_3( double T0_3[4][4], int flagN);
-  void getIkine();
- private:
-  double matrixOfSix[ 4 ][ 4 ];   //åæ ‡ç³»6çŸ©é˜µ
-
-};
+#include <iostream>using std::cout;using std::endl;class Ikine{ public:  double R0_6[3][3];   //Ğı×ª¾ØÕóR0_6  double T0_6[4][4];   //×ª»»¾ØÕóT0_6  double T0_3[4][4];  double Sol[8][6];   //½â¹ı¶È¾ØÕó  double SolR[8][6];   //×îÖÕ½â¾ØÕó  /*ËÄ×éT0_3*/  double T0_3_1[4][4];  double T0_3_2[4][4];  double T0_3_3[4][4];  double T0_3_4[4][4];    /***»úĞµ±Û²ÎÊı***/  double Lu;  double Lf;    /***Euler½Ç ***/  double alfa;  double beta;  double gama;  /***Ç°ÈıÖá½»µãÔÚ×ø±êÏµ6ÖĞµÄÎ»ÖÃ¾ØÕó***/  double Q6_0[4][1];  /***Ä¿±ê½Ç¶È***/  double Theta1_1;  double Theta2_1;  double Theta3_1;  double Theta1_2;  double Theta2_2;  double Theta3_2;    double Theta4_1;  double Theta4_2;    double Theta5_1_1;  double Theta5_1_2;  double Theta5_2_1;  double Theta5_2_2;    double Theta6_1_1;  double Theta6_1_2;  double Theta6_2_1;  double Theta6_2_2;  double Theta6_3_1;  double Theta6_3_2;  double Theta6_4_1;  double Theta6_4_2;  double error;   //ÅĞ¶ÏTheta4,5,6ÊÇ·ñÕıÈ·µØÎó²îÖµ  int flag;   //ÅĞ¶ÏÍê³ÉºóÕı½âµÄÎ»ÖÃ£¬0´ú±í1.3.5.7  1´ú±í2.4.6.8  Ikine( double lu, double lf );   //¹¹Ôìº¯Êı£¬³õÊ¼»¯Í¬Ê±ÌáÈ¡Ğıx×ª¾ØÕó  void setMatrix(double inputmatrix[4][4]);  void getEulerAngle();   //¼ÆËãÓëĞı×ª¾ØÕó¶ÔÓ¦µÄEuler½Ç  void getQ6_0();    //¼ÆËãÇ°ÈıÖá½»µãÔÚ×ø±êÏµ6ÖĞµÄÎ»ÖÃ¾ØÕó  void getCosTheta4();  void getCosTheta5();  void getCosTheta6();  void checkTheta4_6();  void fillSol();   //½«½â¸³Öµµ½¾ØÕóÖĞ  void fillSolR();  void getT0_3();  void getT0_3test();  void getTheta1_3( double T0_3[4][4], int flagN);  void getIkine(); private:  double matrixOfSix[ 4 ][ 4 ];   //×ø±êÏµ6¾ØÕó};
